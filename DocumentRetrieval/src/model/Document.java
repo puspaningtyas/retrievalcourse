@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author puspaingtyas
+ * @author puspaningtyas
  */
 public class Document {
     private int id;
