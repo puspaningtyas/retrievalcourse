@@ -20,6 +20,12 @@ public class Document {
         this.content = content;
     }
 
+    public Document(int id, String content) {
+        this.id = id;
+        this.content = content;
+    }
+    
+
     /**
      * @return the content
      */
@@ -32,6 +38,20 @@ public class Document {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
 }
