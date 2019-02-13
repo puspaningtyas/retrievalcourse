@@ -13,7 +13,7 @@ import model.Document;
  */
 public class testDocument {
     public static void main(String[] args) {
-        Document doc1= new Document(1, "computer information retrieval");
+        Document doc1= new Document(1, "computer information retrieval.");
         // kelurannya kata computer information retrieval 
         // dipotong-potong menjadi 3 string
         // luarnnya:
