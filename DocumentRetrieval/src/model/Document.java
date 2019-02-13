@@ -53,4 +53,8 @@ public class Document {
         this.id = id;
     }
     
+    public String[] getListofTerm(){
+        return null;
+    }
+    
 }
