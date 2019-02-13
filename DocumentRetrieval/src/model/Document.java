@@ -10,6 +10,7 @@ package model;
  * @author puspaingtyas
  */
 public class Document {
+    private int id;
     private String content;
 
     public Document() {
