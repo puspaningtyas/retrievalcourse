@@ -25,7 +25,6 @@ public class Document {
         this.content = content;
     }
     
-
     /**
      * @return the content
      */
