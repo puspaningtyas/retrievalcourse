@@ -44,4 +44,8 @@ public class InvertedIndex {
         return list;
     }
     
+    public ArrayList<Posting> getSortedPostingList(){
+        return null;
+    }
+    
 }
