@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.StringTokenizer;
+
 /**
  *
  * @author puspaningtyas
@@ -54,7 +56,9 @@ public class Document {
     }
     
     public String[] getListofTerm(){
-        return null;
+        String value = this.getContent();
+        value = value.replaceAll("[.,?!]", "");
+        return value.split(" ");
     }
     
 }
