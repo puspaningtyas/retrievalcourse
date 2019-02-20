@@ -19,7 +19,7 @@ public class Term {
         this.term = term;
     }
 
-    public int getNumberOfTerm(){
+    public int getNumberOfDocument(){
         return postingList.size();
     }
     /**
