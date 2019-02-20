@@ -34,7 +34,7 @@ public class testDocument8 {
         index.makeDictionary();
         ArrayList<Posting> result = index.searchOneWord("computer");
         // panggil fungsi search
-        ArrayList<Posting> result1 = index.searchOneWord("machine");
+        ArrayList<Posting> result1 = index.searchOneWord("architecture");
         // pangging fungsi instersect
         ArrayList<Posting> join = index.intersection(result1, result);
         // tampilkan isi document dan id-nya
