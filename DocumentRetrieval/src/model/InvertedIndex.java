@@ -54,9 +54,36 @@ public class InvertedIndex {
         Collections.sort(list);
         return list;
     }
-    
+    /**
+     * Fungsi cari dokumen
+     * @param query
+     * @return 
+     */
     public ArrayList<Posting> search(String query){
+        // buat index/dictionary
+        makeDictionary();
+        String tempQuery[] = query.split(" ");
+        for (int i = 0; i < tempQuery.length; i++) {
+            String string = tempQuery[i];
+            
+        }
         return null;
+    }
+    
+    public ArrayList<Posting> searchOneWord(String word){
+        Term tempTerm = new Term(word);
+        if(getDictionary().isEmpty()){
+            // dictionary kosong
+            return null;
+        } else{
+            int positionTerm = Collections.binarySearch(dictionary,tempTerm);
+            if(positionTerm<0){
+                // tidak ditemukan
+                return null;
+            } else{
+                return dictionary.get(positionTerm).getPostingList();
+            }
+        }
     }
     
     public void makeDictionary(){
