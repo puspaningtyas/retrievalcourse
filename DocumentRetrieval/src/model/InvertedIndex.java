@@ -55,7 +55,7 @@ public class InvertedIndex {
         return list;
     }
     
-    public ArrayList<Document> search(String query){
+    public ArrayList<Posting> search(String query){
         return null;
     }
     

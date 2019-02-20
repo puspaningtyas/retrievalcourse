@@ -31,19 +31,19 @@ public class testDocument7 {
         index.addNewDocument(doc2);
         index.addNewDocument(doc3);
         // panggil fungsi search
-        ArrayList<Document> result = index.search("machine");
+        ArrayList<Posting> result = index.search("machine");
         // tampilkan isi document dan id-nya
         for (int i = 0; i < result.size(); i++) {
-            System.out.println("id_doc = " +result.get(i).getId());
-            System.out.println(result.get(i).getContent());
+            System.out.println("id_doc = " +result.get(i).getDocument().getId());
+            System.out.println(result.get(i).getDocument().getContent());
         }
         
         // panggil fungsi search
-        ArrayList<Document> result1 = index.search("machine organization");
+        ArrayList<Posting> result1 = index.search("machine learning");
         // tampilkan isi document dan id-nya
         for (int i = 0; i < result1.size(); i++) {
-            System.out.println("id_doc = " +result1.get(i).getId());
-            System.out.println(result1.get(i).getContent());
+            System.out.println("id_doc = " +result1.get(i).getDocument().getId());
+            System.out.println(result1.get(i).getDocument().getContent());
         }
         
     }
