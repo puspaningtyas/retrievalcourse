@@ -20,10 +20,9 @@ public class testTFIDF1 {
 
     public static void main(String[] args) {
         // seting dokumen
-        Document doc1 = new Document(1, "computer information retrieval.");
-        Document doc2 = new Document(2, "computer organization and architecture");
-        Document doc3 = new Document(3, "machine learning inteligence architecture");
-        Document doc4 = new Document(4, "machine learning artificial inteligence");
+        Document doc1 = new Document(1, "Shipment of gold damaged in a fire");
+        Document doc2 = new Document(2, "delivery of silver arrived in a silver truck");
+        Document doc3 = new Document(3, "shipment of gold arrived in a truck");
         
         // buat object invertedIndex
         InvertedIndex index = new InvertedIndex();
@@ -31,7 +30,7 @@ public class testTFIDF1 {
         index.addNewDocument(doc1);
         index.addNewDocument(doc2);
         index.addNewDocument(doc3);
-        index.addNewDocument(doc4);
+        
         // panggil fungsi search
         index.makeDictionary();
         ArrayList<Posting> result = index.search("machine learning inteligence");

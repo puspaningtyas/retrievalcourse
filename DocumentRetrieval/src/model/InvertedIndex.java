@@ -28,8 +28,10 @@ public class InvertedIndex {
     public void addNewDocument(Document document) {
         getListOfDocument().add(document);
     }
+    
 
     public ArrayList<Posting> getUnsortedPostingList() {
+        // cek untuk term yang muncul lebih dari 1 kali
         // siapkan posting List
         ArrayList<Posting> list = new ArrayList<Posting>();
         // buat node Posting utk listofdocument
@@ -41,6 +43,7 @@ public class InvertedIndex {
                 // buat object tempPosting
                 Posting tempPosting = new Posting(termResult[j],
                         getListOfDocument().get(i));
+                // cek kemunculan term
                 list.add(tempPosting);
             }
         }
@@ -149,6 +152,8 @@ public class InvertedIndex {
     }
 
     public void makeDictionary() {
+        // cek deteksi ada term yang frekuensinya lebih dari 
+        // 1 pada sebuah dokumen
         // buat posting list term terurut
         ArrayList<Posting> list = getSortedPostingList();
         // looping buat list of term (dictionary)
@@ -216,5 +221,23 @@ public class InvertedIndex {
      */
     public void setDictionary(ArrayList<Term> dictionary) {
         this.dictionary = dictionary;
+    }
+    
+    /**
+     * Fungsi mencari frequensi sebuah term dalam sebuah index
+     * @param term
+     * @return 
+     */
+    public int getDocumentFrequency(String term){
+        return 0;
+    }
+    
+    /**
+     * Fungsi untuk mencari inverse term dari sebuah index
+     * @param term
+     * @return 
+     */
+    public double getInverseDocumentFrequency(String term){
+        return 0.0;
     }
 }
