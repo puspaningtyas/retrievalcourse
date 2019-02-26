@@ -18,16 +18,18 @@ import java.util.function.Consumer;
  * @author admin
  */
 public class InvertedIndex {
+
     private ArrayList<Document> listOfDocument = new ArrayList<Document>();
     private ArrayList<Term> dictionary = new ArrayList<Term>();
+
     public InvertedIndex() {
     }
-    
-    public void addNewDocument(Document document){
+
+    public void addNewDocument(Document document) {
         getListOfDocument().add(document);
     }
-    
-    public ArrayList<Posting> getUnsortedPostingList(){
+
+    public ArrayList<Posting> getUnsortedPostingList() {
         // siapkan posting List
         ArrayList<Posting> list = new ArrayList<Posting>();
         // buat node Posting utk listofdocument
@@ -44,8 +46,8 @@ public class InvertedIndex {
         }
         return list;
     }
-    
-    public ArrayList<Posting> getSortedPostingList(){
+
+    public ArrayList<Posting> getSortedPostingList() {
         // siapkan posting List
         ArrayList<Posting> list = new ArrayList<Posting>();
         // panggil list yang belum terurut
@@ -54,69 +56,124 @@ public class InvertedIndex {
         Collections.sort(list);
         return list;
     }
+
     /**
      * Fungsi cari dokumen
+     *
      * @param query
-     * @return 
+     * @return
      */
-    public ArrayList<Posting> search(String query){
+    public ArrayList<Posting> search(String query) {
         // buat index/dictionary
-        makeDictionary();
+//        makeDictionary();
         String tempQuery[] = query.split(" ");
+        ArrayList<Posting> result = new ArrayList<Posting>();
         for (int i = 0; i < tempQuery.length; i++) {
             String string = tempQuery[i];
-            
+            if (i == 0) {
+                result = searchOneWord(string);
+            } else {
+                ArrayList<Posting> result1 = searchOneWord(string);
+                result = intersection(result, result1);
+            }
         }
-        return null;
+        return result;
     }
-    
+
+    /**
+     * Fungsi untuk menggabungkan 2 buah posting Made by Johan
+     *
+     * @param p1
+     * @param p2
+     * @return
+     */
     public ArrayList<Posting> intersection(ArrayList<Posting> p1,
-            ArrayList<Posting> p2){
-        return null;
+            ArrayList<Posting> p2) {
+        if (p1 == null || p2 == null) {
+            return new ArrayList<>();
+        }
+
+        ArrayList<Posting> postings = new ArrayList<>();
+        int p1Index = 0;
+        int p2Index = 0;
+
+        Posting post1 = p1.get(p1Index);
+        Posting post2 = p2.get(p2Index);
+
+        while (true) {
+            if (post1.getDocument().getId() == post2.getDocument().getId()) {
+                try {
+                    postings.add(post1);
+                    p1Index++;
+                    p2Index++;
+                    post1 = p1.get(p1Index);
+                    post2 = p2.get(p2Index);
+                } catch (Exception e) {
+                    break;
+                }
+
+            } else if (post1.getDocument().getId() < post2.getDocument().getId()) {
+                try {
+                    p1Index++;
+                    post1 = p1.get(p1Index);
+                } catch (Exception e) {
+                    break;
+                }
+
+            } else {
+                try {
+                    p2Index++;
+                    post2 = p2.get(p2Index);
+                } catch (Exception e) {
+                    break;
+                }
+            }
+        }
+        return postings;
     }
-    
-    public ArrayList<Posting> searchOneWord(String word){
+
+    public ArrayList<Posting> searchOneWord(String word) {
         Term tempTerm = new Term(word);
-        if(getDictionary().isEmpty()){
+        if (getDictionary().isEmpty()) {
             // dictionary kosong
             return null;
-        } else{
-            int positionTerm = Collections.binarySearch(dictionary,tempTerm);
-            if(positionTerm<0){
+        } else {
+            int positionTerm = Collections.binarySearch(dictionary, tempTerm);
+            if (positionTerm < 0) {
                 // tidak ditemukan
                 return null;
-            } else{
+            } else {
                 return dictionary.get(positionTerm).getPostingList();
             }
         }
     }
-    
-    public void makeDictionary(){
+
+    public void makeDictionary() {
         // buat posting list term terurut
         ArrayList<Posting> list = getSortedPostingList();
         // looping buat list of term (dictionary)
         for (int i = 0; i < list.size(); i++) {
             // cek dictionary kosong?
-            if(getDictionary().isEmpty()){
+            if (getDictionary().isEmpty()) {
                 // buat term
                 Term term = new Term(list.get(i).getTerm());
                 // tambah posting ke posting list utk term ini
                 term.getPostingList().add(list.get(i));
                 // tambah ke dictionary
                 getDictionary().add(term);
-            } else{
+            } else {
                 // dictionary sudah ada isinya
                 Term tempTerm = new Term(list.get(i).getTerm());
                 // pembandingan apakah term sudah ada atau belum
                 // luaran dari binarysearch adalah posisi
-                int position= Collections.binarySearch(getDictionary(), tempTerm);
-                if(position<0){
+                int position = Collections.binarySearch(getDictionary(), tempTerm);
+                if (position < 0) {
                     // term baru
                     // tambah postinglist ke term
                     tempTerm.getPostingList().add(list.get(i));
                     // tambahkan term ke dictionary
                     getDictionary().add(tempTerm);
-                } else{
+                } else {
                     // term ada
                     // tambahkan postinglist saja dari existing term
                     getDictionary().get(position).
@@ -128,9 +185,9 @@ public class InvertedIndex {
                 // urutkan term dictionary
                 Collections.sort(getDictionary());
             }
-            
+
         }
-        
+
     }
 
     /**
