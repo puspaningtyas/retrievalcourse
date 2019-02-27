@@ -63,6 +63,28 @@ public class Document {
     }
     
     public ArrayList<Posting> getListofPosting(){
+        // panggil fungsi getListOfTerm
+        // buat objek ArrayList<Posting> result untuk menampung hasil
+        // buat looping sebanyak listOfTerm
+            // di dalam looping
+            // jika term pertama maka
+                 // buat object tempPosting
+                 // set atribut document, gunakan this
+                 // tambahkan ke ArrayList result
+            // lainnya
+                 // sorting ArayList result
+                 // cek apakah term sudah ada
+                 // gunakan fungsi search dengan luaran indeks obyek yang memenuhi
+                 // jika hasil cari kurang dari 0  (obyek tidak ada)
+                     // buat object tempPosting
+                     // set atribut document, gunakan this
+                     // tambahkan ke ArrayList result
+                 // lainnya   (obyek ada)
+                     // ambil postingnya, 
+                     // tambahkan atribut numberOfTerm dengan 1
+                     // dgn fungsi get
+                     // int tempNumber = get(indekshasilCari).getNumberOfTerm()+1;
+                     // atau get(indekshasilcari.setNumberOfTerm(tempNumber)
         return null;
     }
     
