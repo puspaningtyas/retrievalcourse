@@ -314,4 +314,14 @@ public class InvertedIndex {
     public double getInverseDocumentFrequency(String term){
         return 0.0;
     }
+    
+    /**
+     * Fungsi untuk mencari term frequency
+     * @param term
+     * @param idDocument
+     * @return 
+     */
+    public int getTermFrequency(String term, int idDocument){
+        return 0;
+    }
 }
