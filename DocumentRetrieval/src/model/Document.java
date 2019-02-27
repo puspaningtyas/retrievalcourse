@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
@@ -59,6 +60,10 @@ public class Document {
         String value = this.getContent();
         value = value.replaceAll("[.,?!]", "");
         return value.split(" ");
+    }
+    
+    public ArrayList<Posting> getListofPosting(){
+        return null;
     }
     
 }
