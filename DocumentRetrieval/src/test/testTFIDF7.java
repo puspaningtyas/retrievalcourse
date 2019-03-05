@@ -16,7 +16,7 @@ import model.Term;
  *
  * @author admin
  */
-public class testTFIDF6 {
+public class testTFIDF7 {
 
     public static void main(String[] args) {
         // seting dokumen
@@ -62,7 +62,14 @@ public class testTFIDF6 {
         int result4 = index.getTermFrequency(tempString2, idDoc);
         System.out.println("TF of "+tempString2+" in idDoc = "+idDoc+ " is "+result4);
         
-    
-        
+        // make arraylist of TFIDF
+        idDoc=1;
+        ArrayList<Posting> tempDocWeight = index.makeTFIDF(idDoc);
+        for (int i = 0; i < tempDocWeight.size(); i++) {
+            Posting tempPost = tempDocWeight.get(i);
+            System.out.println("term= "+tempPost.getTerm()+
+                    ", tf = "+tempPost.getNumberOfTerm()+
+                    ", weight= "+tempPost.getWeight());
+        }
     }
 }
