@@ -264,7 +264,6 @@ public class InvertedIndex {
                 // urutkan term dictionary
                 Collections.sort(getDictionary());
             }
-
         }
 
     }
