@@ -83,7 +83,7 @@ public class testTFIDF8 {
         
         // panggil fungsi inner product
         double resultProduct = index.getInnerProduct(temp1DocWeight, tempDocWeight);
-        System.out.println("Hasil inner product = "+resultProduct);
+        System.out.println("Hasil inner product doc1 dan doc2 = "+resultProduct);
         
         //panggil fungsi buat postinglist dar sebuah query
         ArrayList<Posting> queryPostingList = index.getQueryPosting("silver gold truck");
@@ -93,5 +93,9 @@ public class testTFIDF8 {
                     ", tf = "+tempPost.getNumberOfTerm()+
                     ", weight= "+tempPost.getWeight());
         }
+        // panggil fungsi inner product
+        double result1Product = index.getInnerProduct(queryPostingList, tempDocWeight);
+        System.out.println("Hasil inner product query dan doc1= "+resultProduct);
+        
     }
 }
