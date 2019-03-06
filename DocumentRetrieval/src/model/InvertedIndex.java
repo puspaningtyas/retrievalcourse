@@ -375,7 +375,36 @@ public class InvertedIndex {
      * @param idDocument
      */
     public ArrayList<Posting> makeTFIDF(int idDocument) {
-        return null;
+        // buat obyek sementara dokumen
+        Document doc = new Document();
+        doc.setId(idDocument);
+        // cek apakah dokumen ada di list dokumen
+        int cek = Collections.binarySearch(listOfDocument, doc);
+        if (cek <0){
+            // dokumen tidak ada
+            return null;
+        } else{
+            // dokumen ada
+            // ambil dokumen dari list dokumen
+            doc = listOfDocument.get(cek);
+            // buat posting list dari dokumen
+            ArrayList<Posting> result = doc.getListofPosting();
+            // diurutkan
+            Collections.sort(result);
+            // hitung weight untuk masing-masing posting
+            for (int i = 0; i < result.size(); i++) {
+                // ambil obyek posting pada indeks ke-i
+                Posting temp = result.get(i);
+                // ambil term nya
+                String term = temp.getTerm();
+                // hitung weight
+                double weight = getInverseDocumentFrequency(term);
+                // set atribut weight pada posting list
+                result.get(i).setWeight(weight);
+            }
+            // balikkan result sebagai luaran fungsi
+            return result;
+        }
     }
     
     /**
