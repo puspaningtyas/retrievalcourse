@@ -376,4 +376,25 @@ public class InvertedIndex {
     public ArrayList<Posting> makeTFIDF(int idDocument) {
         return null;
     }
+    
+    /**
+     * Fungsi perkalian inner product dari PostingList
+     * Atribut yang dikalikan adalah atribut weight TFIDF dari posting
+     * @param p1
+     * @param p2
+     * @return 
+     */
+    public double getInnerProduct(ArrayList<Posting> p1,
+            ArrayList<Posting> p2){
+        return 0.0;
+    }
+    
+    /**
+     * Fungsi untuk membentuk posting list dari sebuah query
+     * @param query
+     * @return 
+     */
+    public ArrayList<Posting> getQueryPosting(String query){
+        return null;
+    }
 }
