@@ -95,7 +95,7 @@ public class testTFIDF8 {
         }
         // panggil fungsi inner product
         double result1Product = index.getInnerProduct(queryPostingList, tempDocWeight);
-        System.out.println("Hasil inner product query dan doc1= "+resultProduct);
+        System.out.println("Hasil inner product query dan doc1= "+result1Product);
         
     }
 }
