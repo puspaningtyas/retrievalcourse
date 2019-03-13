@@ -470,4 +470,43 @@ public class InvertedIndex {
         Collections.sort(result);
         return result;
     }
+    
+    /**
+     * Fungsi untuk menghitung panjang dari sebuah posting
+     * @param posting
+     * @return 
+     */
+    public double getLengthOfPosting(ArrayList<Posting> posting){
+        return 0;
+    }
+    
+    /**
+     * Fungsi untuk menghitung cosine similarity
+     * @param posting
+     * @param posting1
+     * @return 
+     */
+    public double getCosineSimilarity(ArrayList<Posting> posting,
+            ArrayList<Posting> posting1){
+        return 0;
+    }
+    
+    /**
+     * Fungsi untuk mencari berdasar nilai TFIDF
+     * @param query
+     * @return 
+     */
+    public ArrayList<Document> searchTFIDF(String query){
+        return null;
+    }
+    
+    /**
+     * Fungsi untuk mencari dokumen berdasarkan cosine similarity
+     * @param query
+     * @return 
+     */
+    public ArrayList<Document> searchCosineSimilarity(String query){
+        return null;
+    }
+    
 }
