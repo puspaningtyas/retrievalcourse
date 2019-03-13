@@ -397,7 +397,7 @@ public class InvertedIndex {
                 // cari tf
                 int tf = result.get(i).getNumberOfTerm();
                 // hitung bobot
-                double bobot = tf*idf;
+                double bobot = tf * idf;
                 // set bobot pada posting
                 result.get(i).setWeight(bobot);
             }
@@ -418,7 +418,28 @@ public class InvertedIndex {
      */
     public double getInnerProduct(ArrayList<Posting> p1,
             ArrayList<Posting> p2) {
-        return 0.0;
+        // urutkan posting list
+        Collections.sort(p2);
+        Collections.sort(p1);
+        // buat temp hasil
+        double result = 0.0;
+        // looping dari posting list p1
+        for (int i = 0; i < p1.size(); i++) {
+            // ambil temp
+            Posting temp = p1.get(i);
+            // cari posting di p2
+            boolean found = false;
+            for (int j = 0; j < p2.size() && found == false; j++) {
+                Posting temp1 = p2.get(j);
+                if (temp1.getTerm().equalsIgnoreCase(temp.getTerm())) {
+                    // term sama
+                    found = true;
+                    // kalikan bobot untuk term yang sama
+                    result = result + temp1.getWeight() * temp.getWeight();
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -428,6 +449,25 @@ public class InvertedIndex {
      * @return
      */
     public ArrayList<Posting> getQueryPosting(String query) {
-        return null;
+        // buat dokumen
+        Document temp = new Document(-1, query);
+        // buat posting list
+        ArrayList<Posting> result = temp.getListofPosting();
+        // hitung bobot
+        // isi bobot dari posting list
+        for (int i = 0; i < result.size(); i++) {
+            // ambil term
+            String tempTerm = result.get(i).getTerm();
+            // cari idf
+            double idf = getInverseDocumentFrequency(tempTerm);
+            // cari tf
+            int tf = result.get(i).getNumberOfTerm();
+            // hitung bobot
+            double bobot = tf * idf;
+            // set bobot pada posting
+            result.get(i).setWeight(bobot);
+        }
+        Collections.sort(result);
+        return result;
     }
 }
