@@ -18,17 +18,17 @@ import java.util.function.Consumer;
  * @author admin
  */
 public class InvertedIndex {
-    
+
     private ArrayList<Document> listOfDocument = new ArrayList<Document>();
     private ArrayList<Term> dictionary = new ArrayList<Term>();
-    
+
     public InvertedIndex() {
     }
-    
+
     public void addNewDocument(Document document) {
         getListOfDocument().add(document);
     }
-    
+
     public ArrayList<Posting> getUnsortedPostingList() {
         // cek untuk term yang muncul lebih dari 1 kali
         // siapkan posting List
@@ -48,7 +48,7 @@ public class InvertedIndex {
         }
         return list;
     }
-    
+
     public ArrayList<Posting> getUnsortedPostingListWithTermNumber() {
         // cek untuk term yang muncul lebih dari 1 kali
         // siapkan posting List
@@ -68,7 +68,7 @@ public class InvertedIndex {
         }
         return list;
     }
-    
+
     public ArrayList<Posting> getSortedPostingList() {
         // siapkan posting List
         ArrayList<Posting> list = new ArrayList<Posting>();
@@ -78,7 +78,7 @@ public class InvertedIndex {
         Collections.sort(list);
         return list;
     }
-    
+
     public ArrayList<Posting> getSortedPostingListWithTermNumber() {
         // siapkan posting List
         ArrayList<Posting> list = new ArrayList<Posting>();
@@ -124,14 +124,14 @@ public class InvertedIndex {
         if (p1 == null || p2 == null) {
             return new ArrayList<>();
         }
-        
+
         ArrayList<Posting> postings = new ArrayList<>();
         int p1Index = 0;
         int p2Index = 0;
-        
+
         Posting post1 = p1.get(p1Index);
         Posting post2 = p2.get(p2Index);
-        
+
         while (true) {
             if (post1.getDocument().getId() == post2.getDocument().getId()) {
                 try {
@@ -143,7 +143,7 @@ public class InvertedIndex {
                 } catch (Exception e) {
                     break;
                 }
-                
+
             } else if (post1.getDocument().getId() < post2.getDocument().getId()) {
                 try {
                     p1Index++;
@@ -151,7 +151,7 @@ public class InvertedIndex {
                 } catch (Exception e) {
                     break;
                 }
-                
+
             } else {
                 try {
                     p2Index++;
@@ -163,7 +163,7 @@ public class InvertedIndex {
         }
         return postings;
     }
-    
+
     public ArrayList<Posting> searchOneWord(String word) {
         Term tempTerm = new Term(word);
         if (getDictionary().isEmpty()) {
@@ -179,7 +179,7 @@ public class InvertedIndex {
             }
         }
     }
-    
+
     public void makeDictionary() {
         // cek deteksi ada term yang frekuensinya lebih dari 
         // 1 pada sebuah dokumen
@@ -219,11 +219,11 @@ public class InvertedIndex {
                 // urutkan term dictionary
                 Collections.sort(getDictionary());
             }
-            
+
         }
-        
+
     }
-    
+
     public void makeDictionaryWithTermNumber() {
         // cek deteksi ada term yang frekuensinya lebih dari 
         // 1 pada sebuah dokumen
@@ -264,7 +264,7 @@ public class InvertedIndex {
                 Collections.sort(getDictionary());
             }
         }
-        
+
     }
 
     /**
@@ -335,7 +335,7 @@ public class InvertedIndex {
             // jumlah dokumen dengan term i
             int ni = getDocumentFrequency(term);
             // idf = log10(N/ni)
-            double Nni = (double) N/ni;
+            double Nni = (double) N / ni;
             return Math.log10(Nni);
         } else {
             // term tidak ada
@@ -365,7 +365,7 @@ public class InvertedIndex {
             }
             return 0;
         }
-        
+
         return 0;
     }
 
@@ -375,27 +375,59 @@ public class InvertedIndex {
      * @param idDocument
      */
     public ArrayList<Posting> makeTFIDF(int idDocument) {
-        return null;
+        // buat posting list hasil
+        ArrayList<Posting> result = new ArrayList<Posting>();
+        // buat document temporary, sesuai passing parameter
+        Document temp = new Document(idDocument);
+        // cek document temp, ada di dalam list document?
+        int cari = Collections.binarySearch(listOfDocument, temp);
+        // jika ada, variable cari akan berisi indeks. nilai lebih dari 0
+        if (cari >= 0) {
+            // dokumen ada
+            // baca dokumen sesuai indek di list dokumen
+            temp = listOfDocument.get(cari);
+            // buat posting list dengan bobot masih 0
+            result = temp.getListofPosting();
+            // isi bobot dari posting list
+            for (int i = 0; i < result.size(); i++) {
+                // ambil term
+                String tempTerm = result.get(i).getTerm();
+                // cari idf
+                double idf = getInverseDocumentFrequency(tempTerm);
+                // cari tf
+                int tf = result.get(i).getNumberOfTerm();
+                // hitung bobot
+                double bobot = tf*idf;
+                // set bobot pada posting
+                result.get(i).setWeight(bobot);
+            }
+            Collections.sort(result);
+        } else {
+            // dokumen tidak ada
+        }
+        return result;
     }
-    
+
     /**
-     * Fungsi perkalian inner product dari PostingList
-     * Atribut yang dikalikan adalah atribut weight TFIDF dari posting
+     * Fungsi perkalian inner product dari PostingList Atribut yang dikalikan
+     * adalah atribut weight TFIDF dari posting
+     *
      * @param p1
      * @param p2
-     * @return 
+     * @return
      */
     public double getInnerProduct(ArrayList<Posting> p1,
-            ArrayList<Posting> p2){
+            ArrayList<Posting> p2) {
         return 0.0;
     }
-    
+
     /**
      * Fungsi untuk membentuk posting list dari sebuah query
+     *
      * @param query
-     * @return 
+     * @return
      */
-    public ArrayList<Posting> getQueryPosting(String query){
+    public ArrayList<Posting> getQueryPosting(String query) {
         return null;
     }
 }

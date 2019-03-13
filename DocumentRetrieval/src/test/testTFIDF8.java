@@ -35,15 +35,15 @@ public class testTFIDF8 {
         index.makeDictionaryWithTermNumber();
         ArrayList<Term> result = index.getDictionary();
         // tampilkan isi document dan id-nya
-        for (int i = 0; i < result.size(); i++) {
-            System.out.println("Term = "+result.get(i).getTerm()+
-                    ",numberOfDocument = "+result.get(i).getNumberOfDocument());
-            ArrayList<Posting> tempPosting = result.get(i).getPostingList();
-            for (int j = 0; j < tempPosting.size(); j++) {
-                System.out.println("id_doc = "+tempPosting.get(j).getDocument().getId()
-                +", numberofTerm = "+tempPosting.get(j).getNumberOfTerm());
-            }
-        }
+//        for (int i = 0; i < result.size(); i++) {
+//            System.out.println("Term = "+result.get(i).getTerm()+
+//                    ",numberOfDocument = "+result.get(i).getNumberOfDocument());
+//            ArrayList<Posting> tempPosting = result.get(i).getPostingList();
+//            for (int j = 0; j < tempPosting.size(); j++) {
+//                System.out.println("id_doc = "+tempPosting.get(j).getDocument().getId()
+//                +", numberofTerm = "+tempPosting.get(j).getNumberOfTerm());
+//            }
+//        }
         
         // number of document
         String tempString = "silver";
@@ -64,6 +64,7 @@ public class testTFIDF8 {
         
         // make arraylist of TFIDF
         idDoc=1;
+        System.out.println("Id Dokument = "+idDoc);
         ArrayList<Posting> tempDocWeight = index.makeTFIDF(idDoc);
         for (int i = 0; i < tempDocWeight.size(); i++) {
             Posting tempPost = tempDocWeight.get(i);
@@ -73,29 +74,30 @@ public class testTFIDF8 {
         }
         
         idDoc=2;
+        System.out.println("Id Dokument = "+idDoc);
         ArrayList<Posting> temp1DocWeight = index.makeTFIDF(idDoc);
         for (int i = 0; i < temp1DocWeight.size(); i++) {
             Posting tempPost = temp1DocWeight.get(i);
-            System.out.println("term= "+tempPost.getTerm()+
-                    ", tf = "+tempPost.getNumberOfTerm()+
-                    ", weight= "+tempPost.getWeight());
+            System.out.println("term= " + tempPost.getTerm()
+                    + ", tf = " + tempPost.getNumberOfTerm()
+                    + ", weight= " + tempPost.getWeight());
         }
         
         // panggil fungsi inner product
-        double resultProduct = index.getInnerProduct(temp1DocWeight, tempDocWeight);
-        System.out.println("Hasil inner product doc1 dan doc2 = "+resultProduct);
+//        double resultProduct = index.getInnerProduct(temp1DocWeight, tempDocWeight);
+//        System.out.println("Hasil inner product doc1 dan doc2 = "+resultProduct);
         
         //panggil fungsi buat postinglist dar sebuah query
-        ArrayList<Posting> queryPostingList = index.getQueryPosting("silver gold truck");
-        for (int i = 0; i < queryPostingList.size(); i++) {
-            Posting tempPost = queryPostingList.get(i);
-            System.out.println("term= "+tempPost.getTerm()+
-                    ", tf = "+tempPost.getNumberOfTerm()+
-                    ", weight= "+tempPost.getWeight());
-        }
+//        ArrayList<Posting> queryPostingList = index.getQueryPosting("silver gold truck");
+//        for (int i = 0; i < queryPostingList.size(); i++) {
+//            Posting tempPost = queryPostingList.get(i);
+//            System.out.println("term= "+tempPost.getTerm()+
+//                    ", tf = "+tempPost.getNumberOfTerm()+
+//                    ", weight= "+tempPost.getWeight());
+//        }
         // panggil fungsi inner product
-        double result1Product = index.getInnerProduct(queryPostingList, tempDocWeight);
-        System.out.println("Hasil inner product query dan doc1= "+result1Product);
-        
+//        double result1Product = index.getInnerProduct(queryPostingList, tempDocWeight);
+//        System.out.println("Hasil inner product query dan doc1= "+result1Product);
+//        
     }
 }
