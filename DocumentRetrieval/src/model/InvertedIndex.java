@@ -496,7 +496,7 @@ public class InvertedIndex {
      * @param query
      * @return 
      */
-    public ArrayList<Document> searchTFIDF(String query){
+    public ArrayList<SearchingResult> searchTFIDF(String query){
         return null;
     }
     
@@ -505,7 +505,7 @@ public class InvertedIndex {
      * @param query
      * @return 
      */
-    public ArrayList<Document> searchCosineSimilarity(String query){
+    public ArrayList<SearchingResult> searchCosineSimilarity(String query){
         return null;
     }
     
