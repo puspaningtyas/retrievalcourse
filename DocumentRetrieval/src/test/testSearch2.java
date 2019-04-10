@@ -35,12 +35,12 @@ public class testSearch2 {
         index.makeDictionaryWithTermNumber();
 
         // searching
-        String query = "silver gold truck";
+        String query = "fire shipment";
         System.out.println("query = " + query);
         ArrayList<SearchingResult> hasilCari1 = index.searchTFIDF(query);
         for (int i = 0; i < hasilCari1.size(); i++) {
             SearchingResult doc = hasilCari1.get(i);
-            System.out.println("IdDokumen = " + doc.getDocument().getId());
+            System.out.println("IdDokumen = " + doc.getDocument().getId()+", weight = "+doc.getSimilarity());
         }
 
         // searching
@@ -49,7 +49,7 @@ public class testSearch2 {
         ArrayList<SearchingResult> hasilCari2 = index.searchCosineSimilarity(query);
         for (int i = 0; i < hasilCari2.size(); i++) {
             SearchingResult doc = hasilCari2.get(i);
-            System.out.println("IdDokumen = " + doc.getDocument().getId());
+            System.out.println("IdDokumen = " + doc.getDocument().getId()+ ", weight = "+doc.getSimilarity());
         }
     }
 }
