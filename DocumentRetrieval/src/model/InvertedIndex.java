@@ -411,7 +411,7 @@ public class InvertedIndex {
     /**
      * Fungsi perkalian inner product dari PostingList Atribut yang dikalikan
      * adalah atribut weight TFIDF dari posting
-     *
+     * Ini dikenal dengan istilah penghitungan jarak Euclidean
      * @param p1
      * @param p2
      * @return
@@ -473,11 +473,24 @@ public class InvertedIndex {
     
     /**
      * Fungsi untuk menghitung panjang dari sebuah posting
+     * Asumsi posting memiliki komponen bobot/weight
      * @param posting
      * @return 
      */
     public double getLengthOfPosting(ArrayList<Posting> posting){
-        return 0;
+        double result=0.0;
+        for (int i = 0; i < posting.size(); i++) {
+            // ambil obyek posting
+            Posting post = posting.get(i);
+            // ambil bobot/weight
+            double weight = post.getWeight();
+            // kuadrat bobot
+            weight = weight*weight;
+            // jumlahkan ke result
+            result = result + weight;
+        }
+        // keluarkan akar kuadrat
+        return Math.sqrt(result);
     }
     
     /**
@@ -488,7 +501,16 @@ public class InvertedIndex {
      */
     public double getCosineSimilarity(ArrayList<Posting> posting,
             ArrayList<Posting> posting1){
-        return 0;
+        // cari jarak antara posting dan posting 1
+        double jarak = getInnerProduct(posting, posting1);
+        // cari panjang posting
+        double panjang_posting = getLengthOfPosting(posting);
+        // cari panjang posting1
+        double panjang_posting1 = getLengthOfPosting(posting1);
+        // hitung cosine similarity
+        double result = 
+                jarak / Math.sqrt(panjang_posting*panjang_posting1);
+        return result;
     }
     
     /**
