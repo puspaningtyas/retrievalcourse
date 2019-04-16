@@ -16,7 +16,7 @@ import model.InvertedIndex;
  */
 public class MyFrame extends javax.swing.JFrame {
 
-    private InvertedIndex index;
+    public static InvertedIndex index;
 
     /**
      * Creates new form MyFrame
@@ -38,6 +38,7 @@ public class MyFrame extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -46,6 +47,14 @@ public class MyFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("Document");
+
+        jMenuItem4.setText("Add Document");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         jMenuItem1.setText("Read Directory");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -114,10 +123,10 @@ public class MyFrame extends javax.swing.JFrame {
                 File file = files[i];
                 doc.readFile(i, file);
                 // masukkan file isi directory ke list of document pada obye index
-                index.addNewDocument(doc);
+                getIndex().addNewDocument(doc);
             }
             // lakukan indexing atau buat dictionary
-            index.makeDictionaryWithTermNumber();
+            getIndex().makeDictionaryWithTermNumber();
         }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -132,6 +141,12 @@ public class MyFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        AddDocDialog addDialog = new AddDocDialog(this, true);
+        addDialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,5 +190,20 @@ public class MyFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the index
+     */
+    public InvertedIndex getIndex() {
+        return index;
+    }
+
+    /**
+     * @param index the index to set
+     */
+    public void setIndex(InvertedIndex index) {
+        this.index = index;
+    }
 }

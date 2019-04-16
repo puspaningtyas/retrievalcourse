@@ -124,6 +124,8 @@ public class Document implements Comparable<Document>{
      * hasil baca dimasukkan ke atribut content
      */
     public void readFile(int idDoc, File file){
-        
+        // simpan idDoc
+        this.id = idDoc;
+        // baca file
     }
 }
