@@ -128,4 +128,10 @@ public class Document implements Comparable<Document>{
         this.id = idDoc;
         // baca file
     }
+
+    @Override
+    public String toString() {
+        return "Document{" + "id=" + id + ", content=" + content + '}';
+    }
+        
 }
