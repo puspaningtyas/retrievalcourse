@@ -180,7 +180,7 @@ public class Document implements Comparable<Document>{
      */
     public void stemming(){
         String text = content;
-        System.out.println("Text = "+text);
+//        System.out.println("Text = "+text);
         Version matchVersion = Version.LUCENE_7_7_0; // Substitute desired Lucene version for XY
         Analyzer analyzer = new StandardAnalyzer();
         analyzer.setVersion(matchVersion);
