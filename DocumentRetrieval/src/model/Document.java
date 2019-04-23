@@ -6,10 +6,19 @@
 package model;
 
 import java.io.File;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.StringTokenizer;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.CharArraySet;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.core.StopFilter;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.util.Version;
 
 /**
  *
@@ -133,5 +142,34 @@ public class Document implements Comparable<Document>{
     public String toString() {
         return "Document{" + "id=" + id + ", content=" + content + '}';
     }
-        
+    
+    public void removeStopWords(){
+        // asumsi content sudah ada
+        String text = content;
+        Version matchVersion = Version.LUCENE_7_7_0; // Substitute desired Lucene version for XY
+        Analyzer analyzer = new StandardAnalyzer();
+        analyzer.setVersion(matchVersion);
+        // ambil stopwords
+        CharArraySet stopWords = EnglishAnalyzer.getDefaultStopSet();
+        // buat token
+        TokenStream tokenStream = analyzer.tokenStream(
+                "myField",
+                new StringReader(text.trim()));
+        // buang stop word
+        tokenStream = new StopFilter(tokenStream, stopWords);
+        // buat string baru tanpa stopword
+        StringBuilder sb = new StringBuilder();
+        CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
+        try {
+            tokenStream.reset();
+            while (tokenStream.incrementToken()) {
+                String term = charTermAttribute.toString();
+                sb.append(term + " ");
+            }
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex);
+        }
+        content = sb.toString();
+    }
+    
 }
