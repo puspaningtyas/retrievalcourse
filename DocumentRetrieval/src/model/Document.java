@@ -28,7 +28,8 @@ import org.apache.lucene.util.Version;
 public class Document implements Comparable<Document>{
 
     private int id;
-    private String content;
+    private String content; // atribut content yang dianalisis
+    private String realContent; // atribut content asli
 
     public Document() {
     }
@@ -39,11 +40,13 @@ public class Document implements Comparable<Document>{
 
     public Document(String content) {
         this.content = content;
+        this.realContent=content;
     }
 
     public Document(int id, String content) {
         this.id = id;
         this.content = content;
+        this.realContent = content;
     }
 
     /**
@@ -141,8 +144,10 @@ public class Document implements Comparable<Document>{
 
     @Override
     public String toString() {
-        return "Document{" + "id=" + id + ", content=" + content + '}';
+        return "Document{" + "id=" + id + ", content=" + content + ", realContent=" + realContent + '}';
     }
+
+    
     /**
      * Fungsi untuk menghilangkan kata stop word
      */
@@ -203,6 +208,20 @@ public class Document implements Comparable<Document>{
             System.out.println("Exception: " + ex);
         }
         content = sb.toString();
+    }
+
+    /**
+     * @return the realContent
+     */
+    public String getRealContent() {
+        return realContent;
+    }
+
+    /**
+     * @param realContent the realContent to set
+     */
+    public void setRealContent(String realContent) {
+        this.realContent = realContent;
     }
     
 }
