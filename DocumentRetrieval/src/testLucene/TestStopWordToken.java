@@ -22,10 +22,10 @@ import org.apache.lucene.util.Version;
 public class TestStopWordToken {
 
     public static void main(String[] args) {
-        String text = "He was a man with gun";
+        String text = "He was a man with gun used for killing many people.";
         System.out.println("Text = "+text);
         Version matchVersion = Version.LUCENE_7_7_0; // Substitute desired Lucene version for XY
-        Analyzer analyzer = new StandardAnalyzer();
+        Analyzer analyzer = new EnglishAnalyzer();
         analyzer.setVersion(matchVersion);
         // ambil stopwords
         CharArraySet stopWords = EnglishAnalyzer.getDefaultStopSet();

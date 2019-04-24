@@ -23,10 +23,10 @@ import org.apache.lucene.util.Version;
 public class TestStemWordToken {
 
     public static void main(String[] args) {
-        String text = "Shipment of gold damaged in a fire";
+        String text = "Shipment of gold damaged in a fire. The ship went to London";
         System.out.println("Text = "+text);
         Version matchVersion = Version.LUCENE_7_7_0; // Substitute desired Lucene version for XY
-        Analyzer analyzer = new StandardAnalyzer();
+        Analyzer analyzer = new EnglishAnalyzer();
         analyzer.setVersion(matchVersion);
         // buat token
         TokenStream tokenStream = analyzer.tokenStream(
