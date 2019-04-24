@@ -224,4 +224,11 @@ public class Document implements Comparable<Document>{
         this.realContent = realContent;
     }
     
+    /**
+     * Fungsi untuk mensteming content dalam bahasa indonesia
+     */
+    public void IndonesiaStemming(){
+        
+    }
+    
 }
