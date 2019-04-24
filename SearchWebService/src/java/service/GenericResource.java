@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import model.Document;
 
 /**
  * REST Web Service
@@ -38,7 +39,8 @@ public class GenericResource {
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public String getJson() {
         //TODO return proper representation object
-        throw new UnsupportedOperationException();
+        Document doc = new Document(1,"He was a man with gun.");
+        return doc.toString();
     }
 
     /**
@@ -50,4 +52,12 @@ public class GenericResource {
     public void putJson(String content) {
     }
     
+    @GET
+    @Path("search")
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    public String getSearch() {
+        //TODO return proper representation object
+        Document doc = new Document(1,"He was a man with gun.");
+        return doc.toString();
+    }
 }
