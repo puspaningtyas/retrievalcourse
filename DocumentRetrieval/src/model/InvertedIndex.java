@@ -609,11 +609,11 @@ public class InvertedIndex {
      */
     public void preClustering(){
         // baca seluruh document
-        for(Document temp :listOfDocument){
+        for(int i=0;i<listOfDocument.size();i++){
             // baca idDoc
-            int idDoc = temp.getId();
+            int idDoc = listOfDocument.get(i).getId();
             // buat posting dengan nilai TF-IDFnya
-            makeTFIDF(idDoc);
+            listOfDocument.get(i).setListOfPosting(makeTFIDF(idDoc));
             
         }
     }
