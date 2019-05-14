@@ -36,6 +36,8 @@ public class Document implements Comparable<Document> {
     private int id;
     private String content; // atribut content yang dianalisis
     private String realContent; // atribut content asli
+    // list posting untuk keperluan clustering document
+    private ArrayList<Posting> listOfPosting = new ArrayList<Posting>();
 
     public Document() {
     }
@@ -283,6 +285,20 @@ public class Document implements Comparable<Document> {
         } catch (IOException ex) {
             Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    /**
+     * @return the listOfPosting
+     */
+    public ArrayList<Posting> getListOfPosting() {
+        return listOfPosting;
+    }
+
+    /**
+     * @param listOfPosting the listOfPosting to set
+     */
+    public void setListOfPosting(ArrayList<Posting> listOfPosting) {
+        this.listOfPosting = listOfPosting;
     }
 
 }

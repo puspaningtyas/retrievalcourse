@@ -22,7 +22,9 @@ public class InvertedIndex {
 
     private ArrayList<Document> listOfDocument = new ArrayList<Document>();
     private ArrayList<Term> dictionary = new ArrayList<Term>();
-
+    private ArrayList<Cluster> cluster = new ArrayList<Cluster>();
+    public static final int NUMBER_OF_DOCUMENT_CLUSTER = 2; 
+    
     public InvertedIndex() {
     }
 
@@ -586,6 +588,33 @@ public class InvertedIndex {
     public void readDirectory(File directory){
         
     }
+
+    /**
+     * @return the cluster
+     */
+    public ArrayList<Cluster> getCluster() {
+        return cluster;
+    }
+
+    /**
+     * @param cluster the cluster to set
+     */
+    public void setCluster(ArrayList<Cluster> cluster) {
+        this.cluster = cluster;
+    }
     
-    
+    /**
+     * Fungsi penyiapan pasting dari seluruh document
+     * Asumsi document sudah di stemming
+     */
+    public void preClustering(){
+        // baca seluruh document
+        for(Document temp :listOfDocument){
+            // baca idDoc
+            int idDoc = temp.getId();
+            // buat posting dengan nilai TF-IDFnya
+            makeTFIDF(idDoc);
+            
+        }
+    }
 }
