@@ -5,8 +5,10 @@
  */
 package testCluster;
 
+import java.util.ArrayList;
 import model.Document;
 import model.InvertedIndex;
+import model.Posting;
 
 /**
  *
@@ -34,6 +36,13 @@ public class TestCluster1 {
         // bikin preclustering
         index.preClustering();
         for (int i = 0; i < index.getListOfDocument().size(); i++) {
-            
+            ArrayList<Posting> listPosting = 
+                    index.getListOfDocument().get(i).getListOfClusteringPosting();
+            System.out.println("IdDoc = "+index.getListOfDocument().get(i).getId());
+            for (int j = 0; j < listPosting.size(); j++) {
+                System.out.println(listPosting.get(j));
+            }
+        
+        }
     }
 }
