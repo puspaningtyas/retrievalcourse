@@ -648,6 +648,8 @@ public class InvertedIndex {
             // sorting similarity
             Collections.sort(listOfSimilarity);
             // asumsi sorting descending , similarity terurut dari besar ke kecil
+            // tetapkan document ke cluster dengan similarity terbesar
+            // anda juga bisa tetapkan dengan KNN
             listOfSimilarity.get(0).getCluster().getMember().add(doc);
         }
     }
