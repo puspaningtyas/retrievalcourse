@@ -288,17 +288,19 @@ public class Document implements Comparable<Document> {
     }
 
     /**
-     * @return the listOfPosting
+     * @return the listOfClusteringPosting
      */
-    public ArrayList<Posting> getListOfPosting() {
+    public ArrayList<Posting> getListOfClusteringPosting() {
         return listOfClusteringPosting;
     }
 
     /**
-     * @param listOfPosting the listOfPosting to set
+     * @param listOfClusteringPosting the listOfClusteringPosting to set
      */
-    public void setListOfPosting(ArrayList<Posting> listOfPosting) {
-        this.listOfClusteringPosting = listOfPosting;
+    public void setListOfClusteringPosting(ArrayList<Posting> listOfClusteringPosting) {
+        this.listOfClusteringPosting = listOfClusteringPosting;
     }
+
+    
 
 }
