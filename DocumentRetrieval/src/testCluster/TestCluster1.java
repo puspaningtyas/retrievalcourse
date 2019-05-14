@@ -31,5 +31,9 @@ public class TestCluster1 {
         index.addNewDocument(doc3);
         // bikin dictionary
         index.makeDictionaryWithTermNumber();
+        // bikin preclustering
+        index.preClustering();
+        for (int i = 0; i < index.getListOfDocument().size(); i++) {
+            
     }
 }

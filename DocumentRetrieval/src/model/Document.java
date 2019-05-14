@@ -37,7 +37,7 @@ public class Document implements Comparable<Document> {
     private String content; // atribut content yang dianalisis
     private String realContent; // atribut content asli
     // list posting untuk keperluan clustering document
-    private ArrayList<Posting> listOfPosting = new ArrayList<Posting>();
+    private ArrayList<Posting> listOfClusteringPosting = new ArrayList<Posting>();
 
     public Document() {
     }
@@ -291,14 +291,14 @@ public class Document implements Comparable<Document> {
      * @return the listOfPosting
      */
     public ArrayList<Posting> getListOfPosting() {
-        return listOfPosting;
+        return listOfClusteringPosting;
     }
 
     /**
      * @param listOfPosting the listOfPosting to set
      */
     public void setListOfPosting(ArrayList<Posting> listOfPosting) {
-        this.listOfPosting = listOfPosting;
+        this.listOfClusteringPosting = listOfPosting;
     }
 
 }
